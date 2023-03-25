@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 29</title>
+  </head>
+  <body>
+    <!-- Task 3 and 4 -->
+
+    <style>
+      button {
+        background-color: #3272e9;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        padding: 10px 10px;
+        margin: 20px 20px;
+        cursor: pointer;
+        box-shadow: -6px 4px 8px 0px #50b1e5;
+      }
+      button:hover {
+        background-color: rgb(20, 4, 165);
+      }
+    </style>
+
+    <h2>Title start from A</h2>
+    <div class="user-a"></div>
+
+    <h2>Title start from AB</h2>
+    <div class="user-ab"></div>
+
+    <button class="add-a">Title start from A</button>
+    <button class="add-ab">Title start from AB</button>
+    <button class="add-all">Title start from A and AB</button>
+
+    <script>
+      // Task 1
+
+      function getData(url) {
+        new Promise(function (resolve, reject) {
+          let result = fetch(url);
+          result
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              }
+              throw new Error(`Error: ${response.status}`);
+            })
+            .then((data) =>
+              console.log(data.filter((datas) => datas.title.startsWith("a")))
+            )
+            .catch((error) => console.log(error.message));
+        });
+      }
+
+      getData("https://jsonplaceholder.typicode.com/todos");
+
+      // Task 2
+
+      // async function getData(url) {
+      //   try {
+      //     let result = await fetch(url);
+      //     if (result.ok) {
+      //       let response = await result.json();
+      //       console.log(
+      //         "Data:",
+      //         response.filter((respons) => respons.title.startsWith("a"))
+      //       );
+      //     } else {
+      //       throw new Error(`Error: ${result.status}`);
+      //     }
+      //   } catch (error) {
+      //     console.log(error.message);
+      //   }
+      // }
+
+      // getData("https://jsonplaceholder.typicode.com/todos");
+
+      // Task 3
+
+      // function getData() {
+      //   fetch("https://jsonplaceholder.typicode.com/todos/")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       const userA = document.querySelector(".user-a");
+      //       const userAB = document.querySelector(".user-ab");
+      //       const filtered = data.filter(
+      //         (todo) =>
+      //           todo.title.startsWith("a") || todo.title.startsWith("ab")
+      //       );
+      //       filtered.forEach((todo) => {
+      //         const todoElem = document.createElement("div");
+      //         todoElem.textContent = JSON.stringify(todo);
+      //         if (todo.title.startsWith("ab")) {
+      //           userAB.appendChild(todoElem);
+      //         } else {
+      //           userA.appendChild(todoElem);
+      //         }
+      //       });
+      //     })
+      //     .catch((error) => console.error(error));
+      // }
+
+      // getData();
+
+      // Task 4
+
+      // const btnA = document.querySelector(".add-a");
+      // const btnAB = document.querySelector(".add-ab");
+      // const btnAll = document.querySelector(".add-all");
+      // const userA = document.querySelector(".user-a");
+      // const userAB = document.querySelector(".user-ab");
+      // let isDataDisplayed = false;
+
+      // function getData(sortBy) {
+      //   fetch("https://jsonplaceholder.typicode.com/todos/")
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       const filtered = data.filter((todo) =>
+      //         todo.title.startsWith(sortBy)
+      //       );
+      //       filtered.forEach((todo) => {
+      //         const todoElem = document.createElement("div");
+      //         todoElem.textContent = JSON.stringify(todo);
+      //         if (sortBy === "a") {
+      //           userA.appendChild(todoElem);
+      //         } else if (sortBy === "ab") {
+      //           userAB.appendChild(todoElem);
+      //         }
+      //       });
+      //     })
+      //     .catch((error) => console.error(error));
+      // }
+
+      // btnA.addEventListener("click", () => {
+      //   if (!isDataDisplayed) {
+      //     getData("a");
+      //     isDataDisplayed = true;
+      //   } else {
+      //     userA.innerHTML = "";
+      //     isDataDisplayed = false;
+      //   }
+      // });
+
+      // btnAB.addEventListener("click", () => {
+      //   if (!isDataDisplayed) {
+      //     getData("ab");
+      //     isDataDisplayed = true;
+      //   } else {
+      //     userAB.innerHTML = "";
+      //     isDataDisplayed = false;
+      //   }
+      // });
+
+      // btnAll.addEventListener("click", () => {
+      //   if (!isDataDisplayed) {
+      //     getData("a");
+      //     getData("ab");
+      //     isDataDisplayed = true;
+      //   } else {
+      //     userA.innerHTML = "";
+      //     userAB.innerHTML = "";
+      //     isDataDisplayed = false;
+      //   }
+      // });
+    </script>
+  </body>
+</html>
